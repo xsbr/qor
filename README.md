@@ -5,6 +5,9 @@ The main goal is provide a simple way to control a FIFO queue backed by a Redis 
 
 This code still under development and not ready for production.
 
+Job Flow
+--------
+
 ```
 
              ,-------.                 ,---------.                     ,----------.
@@ -17,9 +20,12 @@ This code still under development and not ready for production.
 
 ```
 
+Code Sample
+-----------
+
 Create Jobs on Producers:
 
-```
+```python
 queue = qor.Queue('production')
 
 # create first job
@@ -34,7 +40,7 @@ print queue.stats()
 
 Running jobs on Workers:
 
-```
+```python
 import time
 
 queue = qor.Queue('production')
