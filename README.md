@@ -31,6 +31,8 @@ Code Sample
 Create Jobs on Producers:
 
 ```python
+import qor
+
 queue = qor.Queue('production')
 
 # create first job
@@ -46,6 +48,7 @@ print queue.stats()
 Running jobs on Workers:
 
 ```python
+import qor
 import time
 
 queue = qor.Queue('production')
