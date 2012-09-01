@@ -25,7 +25,7 @@ class Queue:
             'working': self.redis.scard('%s:working' % self.qkey),
             'worked': self.redis.get('%s:worked' % self.qkey),
             'failed': self.redis.get('%s:failed' % self.qkey),
-            'complete': self.redis.get('%s:complete' % self.qkey)
+            'completed': self.redis.get('%s:completed' % self.qkey)
         }
 
         # avoid None values
@@ -103,9 +103,9 @@ class Queue:
         pipe.rpush('%s:finished' % self.qkey, jobid)
         
         jkey = self._jkey(jobid)
-        state = 'complete' if successful else 'failed'
+        state = 'completed' if successful else 'failed'
 
-        # counts failed/complete jobs
+        # counts failed/completed jobs
         pipe.incr('%s:%s' % (self.qkey, state))
 
         # updates job

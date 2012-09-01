@@ -8,16 +8,21 @@ This code still under development and not ready for production.
 Job Flow
 --------
 
+Each Queue has three stages (lists):
+* ready - jobs waiting to running
+* working - jobs are running
+* finished - jobs were finished (completed or failed)
+
 ```
 
-             ,-------.                 ,---------.                     ,----------.
- addjob() -> | ready | -> nextjob() -> | working | -> finishjob() ---> | complete |
-             `-------'                 `---------'                 |   `----------'
-                                                                   |
-                                                                   `-> ,----------.
-                                                                       |  failed  |
-                                                                       `----------'
-
+                           *-> worker process job
+                           |          and finish it <-*
+           ,-------.       |       ,---------.        |        ,----------.
+ addjob -> | ready | -> nextjob -> | working | -> finishjob -> | finished | -> nextpurgejob
+   |       `-------'               `---------'                 `----------'
+   |                                                                 |
+   *-> producer add job             at finished list job can have  <-*
+                                    two states: completed or failed
 ```
 
 Code Sample
