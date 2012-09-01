@@ -21,7 +21,7 @@ Each Queue has three stages (lists):
  addjob -> | ready | -> nextjob -> | working | -> finishjob -> | finished | -> nextpurgejob
    |       `-------'               `---------'                 `----------'
    |                                                                 |
-   *-> producer add job             at finished list job can have  <-*
+   *-> producer add job               at finished list job can has <-*
                                     two states: completed or failed
 ```
 
@@ -45,7 +45,7 @@ jobid2 = queue.addjob({'description': 'Second Job', 'systemid': 'a0b1c2d3e4'})
 print queue.stats()
 ```
 
-Running jobs on Workers:
+Running Jobs on Workers:
 
 ```python
 import qor
