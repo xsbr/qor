@@ -49,7 +49,7 @@ queue = qor.Queue('production')
 while True:
 
     # get next job in queue
-    jobid = q.nextjob()
+    jobid = queue.nextjob()
 
     if jobid == None:
         print "Waiting for new jobs..."
@@ -61,5 +61,5 @@ while True:
         print "JobID %s - %s" % (jobid, job)
 
         # finish job
-        q.finishjob(jobid)
+        queue.finishjob(jobid)
 ```
