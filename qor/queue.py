@@ -12,9 +12,11 @@ class Queue:
         self.qkey = 'q:%s' % queue
 
     def _encode(self, data):
+        "Encode data to json"
         return json.dumps(data)
 
     def _decode(self, data):
+        "Decode data from json"
         return json.loads(data)
 
     def _jkey(self, jobid):
@@ -33,6 +35,7 @@ class Queue:
         return self.redis.exists(jkey)
 
     def _timenow(self):
+        "Return integer timestamp"
         return int(time.time())
 
     def size(self):
