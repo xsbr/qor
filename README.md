@@ -15,10 +15,10 @@ Each Queue has three stages (lists):
 
 ```
 
-                           *-> worker process job
-                           |          and finish it <-*
-           ,-------.       |       ,---------.        |        ,----------.
- addjob -> | ready | -> nextjob -> | working | -> finishjob -> | finished | -> nextpurgejob
+                           *-> get next process job         return oldest finished <-*
+                           |          and finish it <-*          job and delete it   |
+           ,-------.       |       ,---------.        |        ,----------.          |
+ addjob -> | ready | -> nextjob -> | working | -> finishjob -> | finished | -> nextjobpurge
    |       `-------'               `---------'                 `----------'
    |                                                                 |
    *-> producer add job               at finished list job can has <-*
@@ -38,8 +38,8 @@ queue = qor.Queue('production')
 # create first job
 jobid1 = queue.addjob('First Job')
 
-# you can send any type of value
-jobid2 = queue.addjob({'description': 'Second Job', 'systemid': 'a0b1c2d3e4'})
+# you can send any type of value (expires in 10 seconds)
+jobid2 = queue.addjob({'description': 'Second Job', 'systemid': 'a0b1c2d3e4'}, 10)
 
 # show Queue Statistics
 print queue.stats()
