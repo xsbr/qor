@@ -200,6 +200,7 @@ class Queue:
                 jobid = int(jobid)
                 jobdata = self.jobdata(jobid)
                 if jobdata:
+                    self._deletejob(jobid)
                     break
 
         return jobdata
