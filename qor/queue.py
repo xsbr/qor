@@ -21,7 +21,7 @@ class Queue:
 
     def _jkey(self, jobid):
         "Format Job Redis Key"
-        return '%s:j:%s' % (self.qkey, jobid)
+        return 'j:%s' % jobid
 
     def _deletejob(self, jobid):
         "Delete Job"
@@ -67,7 +67,7 @@ class Queue:
         "Put a new Job in Queue"
 
         # JobID autoincrement
-        jobid = self.redis.incr('%s:lastid' % self.qkey)
+        jobid = self.redis.incr('j:lastid')
         
         # Job Redis Key
         jkey = self._jkey(jobid)
